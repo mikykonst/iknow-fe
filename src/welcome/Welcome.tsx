@@ -9,29 +9,40 @@ export const Welcome: React.FC = () => {
   const history = useHistory();
 
   const handleSubmit = async () => {
-    const usersFetch = await fetch('https://iknow-be.herokuapp.com/users');
-    const users = await usersFetch.json();
-    const existedUser = users.find((user: {name: string; id: number;}) => user.name === userName);
-debugger;
-    if (existedUser) {
-      history.push('/game', {
-        userId: existedUser.id,
-      });
-    }
+    debugger;
+    if (localStorage.getItem('user')) {
+      const currentUser = JSON.parse(localStorage.getItem('user') as string);
 
-    const result = await fetch('https://iknow-be.herokuapp.com/users', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({name: userName, id: users.length}),
-    });
-
-    if (result.status === 201) {
       history.push('/game', {
-        userId: users.length,
+        userId: currentUser.id,
       });
+    } else {
+      const usersFetch = await fetch('https://iknow-be.herokuapp.com/users');
+      const users = await usersFetch.json();
+      const existedUser = users.find((user: {name: string; id: number;}) => user.name === userName);
+
+      if (existedUser) {
+        localStorage.setItem('user', JSON.stringify(existedUser));
+        history.push('/game', {
+          userId: existedUser.id,
+        });
+      }
+
+      const result = await fetch('https://iknow-be.herokuapp.com/users', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({name: userName, id: users.length}),
+      });
+
+      if (result.status === 201) {
+        localStorage.setItem('user', JSON.stringify({name: userName, id: users.length}));
+        history.push('/game', {
+          userId: users.length,
+        });
+      }
     }
   };
 
