@@ -14,9 +14,11 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "express": "^4.17.1",
     "firebase": "^8.6.8",
     "heroku": "^7.35.0",
     "node-sass": "5.0.0",
+    "path": "^0.12.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
@@ -30,7 +32,8 @@
     "postinstall": "npm run prestart:prod",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:heroku": "node server/server.js"
   },
   "eslintConfig": {
     "extends": [
