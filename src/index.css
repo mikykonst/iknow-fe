@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Press Start 2P';
+  src: local('Press_Start_2P'), url(./fonts/Press_Start_2P/PressStart2P-Regular.ttf) format('truetype');
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
