@@ -7,7 +7,7 @@ const useAudio = (url: string) => {
   const toggle: MouseEventHandler<HTMLButtonElement> = () => setPlaying(!playing);
 
   useEffect(() => {
-      playing ? audio.play() : audio.pause();
+      playing ? audio.play() : audio.load();
     },
     [playing]
   );
